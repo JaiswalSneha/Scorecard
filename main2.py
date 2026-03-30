@@ -40,16 +40,16 @@ This dataset contains real-world inspired credit application data used for:
 """)
 
 
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background-color: #E3F2FD;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+# st.markdown(
+#     """
+#     <style>
+#     .stApp {
+#         background-color: #E3F2FD;
+#     }
+#     </style>
+#     """,
+#     unsafe_allow_html=True
+# )
 
 st.set_page_config(
     # page_title="Credit Scorecard Dashboard",
@@ -1030,16 +1030,12 @@ num_cols_rej = rej.select_dtypes(include=['int64', 'float64']).columns.tolist()
 cat_cols_rej = rej.select_dtypes(include=['object', 'category']).columns.tolist()
 
 for col in rej.columns:
-    # st.text(f'columnam e {col}')
-    if col in num_cols_rej:
-        # st.text('in numbers')
-        temp = map_to_coarse_bins(temp, col, coarse_bins_df_create[f'{col}_coarse_bin'], is_categorical=False)
-    else:
-        if col.endswith('_is_missing'):
-            # st.text('in cate')
+    if col.endswith('_is_missing'):
             temp = map_to_coarse_bins(temp, col, coarse_bins_df_create[col], is_categorical=True)
+    else:
+        if col in num_cols_rej:
+            temp = map_to_coarse_bins(temp, col, coarse_bins_df_create[f'{col}_coarse_bin'], is_categorical=False)
         else:
-            # st.text('in text')
             temp = map_to_coarse_bins(temp, col, coarse_bins_df_create[f'{col}_coarse_bin'], is_categorical=True)
 
 st.dataframe(temp[sorted(temp.columns)])
