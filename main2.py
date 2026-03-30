@@ -292,7 +292,6 @@ st.markdown('---')
 st.info('Correlation is checked after WOE transformation and IV-based variable selection, as WOE ensures linearity and makes correlation meaningful for logistic regression. Highly correlated variables are pruned to avoid multicollinearity')
 st.markdown('---')
 # # ========================== Creating bins =============================
-import woe as woe
 
 st.header('Creating Fine bins and Missing Columns for variables for Null data')
 
